@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YOUR TITLE GOES HERE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <!-- Uncomment to use external CSS
+    <link rel="stylesheet" href="PATH/TO/EXTERNAL/STYLES.CSS">
+    -->
+
+    <style type="text/css">
+      /* Your CSS goes here */
+    </style>
+  </head>
+
+  <body>
+    <!-- Create a hidden file input and a button that links to it. -->
+    <input type="file" id="fileInput" onchange="readFile()" style="display: none;">
+    <button onclick="document.getElementById('fileInput').click()">Choose file</button>
+
+    <!-- Uncomment to use external JavaScript
+    <script src="PATH/TO/EXTERNAL/SCRIPT.JS"></script>
+    -->
+
+    <script>
+      var x;
+      function readFile() {
+        // Get the chosen file as a blob (cancel if no file was selected).
+        var fileInput = document.getElementById('fileInput');
+        if (!fileInput.files || !fileInput.files[0]) {
+          return;
+        }
+        var file = fileInput.files[0];
+
+        // Read the file as text.
+        var reader = new FileReader();
+        reader.onload = function() {
+          // Convert the text to an XML tree.
+          var text = reader.result;
+          var parser = new DOMParser();
+          var xml = parser.parseFromString(text, 'text/xml');
+
+          // **USAGE:** Change the name of myCallback() to whatever you want.
+          myCallback(xml);
+        }
+        reader.readAsText(file);
+      }
+
+      function myCallback(xml) {
+        // **USAGE:** Program your next steps here (and change the name!).
+        // e.g.   console.log(xml);
+        console.log(xml);
+        x = xml;
+      }
+    </script>
+  </body>
+</html>

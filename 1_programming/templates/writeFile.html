@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YOUR TITLE GOES HERE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <!-- Uncomment to use external CSS.
+    <link rel="stylesheet" href="PATH/TO/EXTERNAL/STYLES.CSS">
+    -->
+
+    <style type="text/css">
+      /* Your CSS goes here. */
+    </style>
+  </head>
+
+  <body>
+    <!-- Your HTML goes here. -->
+
+    <!-- You MUST include FileSaver.js to use saveAs! -->
+    <script src="FileSaver.js"></script>
+
+    <script>
+      function writeText(text, filename) {
+        // Convert the text to a blob, then save (using saveAs from FileSaver.js).
+        var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, filename);
+      }
+
+      function writeCSV(data, filename) {
+        // Convert the data to a CSV string, then save using writeText.
+        var data2 = data;
+        for (var i=0; i<data.length; i++) {
+          data2[i] = data[i].join(',');
+        }
+        var text = data2.join('\n');
+        writeText(text, filename);
+      }
+
+      function writeXML(xml, filename) {
+        // Convert the XML to a string, then save using writeText.
+        var serial = new XMLSerializer;
+        var text = serial.serializeToString(xml);
+        writeText(text, filename);
+      }
+
+      function writeJSON(obj, filename) {
+        // Convert the object to a JSON string, then save using writeText.
+        var text = JSON.stringify(obj);
+        writeText(text, filename);
+      }
+
+      // **USAGE:** Call writeText, writeCSV, writeXML, or writeJSON with two arguments:
+      //  - the data to write
+      //  - the filename to save with
+      // These will all be written as plain text.
+    </script>
+  </body>
+</html>
